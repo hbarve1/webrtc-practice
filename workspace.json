@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "get-user-media-gum": "apps/get-user-media-gum",
+    "get-user-media-gum-e2e": "apps/get-user-media-gum-e2e"
+  }
+}
