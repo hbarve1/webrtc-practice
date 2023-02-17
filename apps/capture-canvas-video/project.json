@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/capture-canvas-video/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/capture-canvas-video",
+        "compiler": "babel",
+        "index": "apps/capture-canvas-video/src/index.html",
+        "baseHref": "/",
+        "main": "apps/capture-canvas-video/src/main.ts",
+        "polyfills": "apps/capture-canvas-video/src/polyfills.ts",
+        "tsConfig": "apps/capture-canvas-video/tsconfig.app.json",
+        "assets": [
+          "apps/capture-canvas-video/src/favicon.ico",
+          "apps/capture-canvas-video/src/assets"
+        ],
+        "styles": ["apps/capture-canvas-video/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/capture-canvas-video/src/environments/environment.ts",
+              "with": "apps/capture-canvas-video/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "capture-canvas-video:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "capture-canvas-video:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/capture-canvas-video/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/capture-canvas-video"],
+      "options": {
+        "jestConfig": "apps/capture-canvas-video/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

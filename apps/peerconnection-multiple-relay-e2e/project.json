@@ -1,0 +1,30 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/peerconnection-multiple-relay-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/peerconnection-multiple-relay-e2e/cypress.json",
+        "devServerTarget": "peerconnection-multiple-relay:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "peerconnection-multiple-relay:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/peerconnection-multiple-relay-e2e/**/*.{js,ts}"
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["peerconnection-multiple-relay"]
+}

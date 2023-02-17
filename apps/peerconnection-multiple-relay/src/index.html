@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PeerconnectionMultipleRelay</title>
+    <base href="/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <div id="container">
+      <h1>
+        <a href="//webrtc.github.io/samples/" title="WebRTC samples homepage"
+          >WebRTC samples</a
+        >
+        <span>Peer connection relay</span>
+      </h1>
+
+      <div id="videos">
+        <video id="video1" playsinline autoplay muted></video>
+        <video id="video2" playsinline autoplay></video>
+      </div>
+
+      <section>
+        <input type="checkbox" id="audio" /><label for="audio"
+          >Include audio (supported in Chrome 49 and above)</label
+        >
+      </section>
+
+      <div id="buttons">
+        <button id="start">Start</button>
+        <button id="call" disabled>Call</button>
+        <button id="insertRelay" disabled>Insert relay</button>
+        <button id="hangup" disabled>Hang Up</button>
+      </div>
+
+      <div id="status"></div>
+
+      <a
+        href="https://github.com/webrtc/samples/tree/gh-pages/src/content/peerconnection/multiple-relay"
+        title="View source for this page on GitHub"
+        id="viewSource"
+        >View source on GitHub</a
+      >
+    </div>
+  </body>
+</html>

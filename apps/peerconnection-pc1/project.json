@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/peerconnection-pc1/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/peerconnection-pc1",
+        "compiler": "babel",
+        "index": "apps/peerconnection-pc1/src/index.html",
+        "baseHref": "/",
+        "main": "apps/peerconnection-pc1/src/main.ts",
+        "polyfills": "apps/peerconnection-pc1/src/polyfills.ts",
+        "tsConfig": "apps/peerconnection-pc1/tsconfig.app.json",
+        "assets": [
+          "apps/peerconnection-pc1/src/favicon.ico",
+          "apps/peerconnection-pc1/src/assets"
+        ],
+        "styles": ["apps/peerconnection-pc1/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/peerconnection-pc1/src/environments/environment.ts",
+              "with": "apps/peerconnection-pc1/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "peerconnection-pc1:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "peerconnection-pc1:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/peerconnection-pc1/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/peerconnection-pc1"],
+      "options": {
+        "jestConfig": "apps/peerconnection-pc1/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

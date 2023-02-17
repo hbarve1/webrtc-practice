@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/peerconnection-audio/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/peerconnection-audio",
+        "compiler": "babel",
+        "index": "apps/peerconnection-audio/src/index.html",
+        "baseHref": "/",
+        "main": "apps/peerconnection-audio/src/main.ts",
+        "polyfills": "apps/peerconnection-audio/src/polyfills.ts",
+        "tsConfig": "apps/peerconnection-audio/tsconfig.app.json",
+        "assets": [
+          "apps/peerconnection-audio/src/favicon.ico",
+          "apps/peerconnection-audio/src/assets"
+        ],
+        "styles": ["apps/peerconnection-audio/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/peerconnection-audio/src/environments/environment.ts",
+              "with": "apps/peerconnection-audio/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "peerconnection-audio:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "peerconnection-audio:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/peerconnection-audio/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/peerconnection-audio"],
+      "options": {
+        "jestConfig": "apps/peerconnection-audio/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

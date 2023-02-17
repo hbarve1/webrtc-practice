@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/peerconnection-multiple-relay/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/peerconnection-multiple-relay",
+        "compiler": "babel",
+        "index": "apps/peerconnection-multiple-relay/src/index.html",
+        "baseHref": "/",
+        "main": "apps/peerconnection-multiple-relay/src/main.ts",
+        "polyfills": "apps/peerconnection-multiple-relay/src/polyfills.ts",
+        "tsConfig": "apps/peerconnection-multiple-relay/tsconfig.app.json",
+        "assets": [
+          "apps/peerconnection-multiple-relay/src/favicon.ico",
+          "apps/peerconnection-multiple-relay/src/assets"
+        ],
+        "styles": ["apps/peerconnection-multiple-relay/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/peerconnection-multiple-relay/src/environments/environment.ts",
+              "with": "apps/peerconnection-multiple-relay/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "peerconnection-multiple-relay:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "peerconnection-multiple-relay:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/peerconnection-multiple-relay/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/peerconnection-multiple-relay"],
+      "options": {
+        "jestConfig": "apps/peerconnection-multiple-relay/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

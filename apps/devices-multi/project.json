@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/devices-multi/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/devices-multi",
+        "compiler": "babel",
+        "index": "apps/devices-multi/src/index.html",
+        "baseHref": "/",
+        "main": "apps/devices-multi/src/main.ts",
+        "polyfills": "apps/devices-multi/src/polyfills.ts",
+        "tsConfig": "apps/devices-multi/tsconfig.app.json",
+        "assets": [
+          "apps/devices-multi/src/favicon.ico",
+          "apps/devices-multi/src/assets"
+        ],
+        "styles": ["apps/devices-multi/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/devices-multi/src/environments/environment.ts",
+              "with": "apps/devices-multi/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "devices-multi:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "devices-multi:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/devices-multi/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/devices-multi"],
+      "options": {
+        "jestConfig": "apps/devices-multi/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

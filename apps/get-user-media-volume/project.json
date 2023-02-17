@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/get-user-media-volume/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/get-user-media-volume",
+        "compiler": "babel",
+        "index": "apps/get-user-media-volume/src/index.html",
+        "baseHref": "/",
+        "main": "apps/get-user-media-volume/src/main.ts",
+        "polyfills": "apps/get-user-media-volume/src/polyfills.ts",
+        "tsConfig": "apps/get-user-media-volume/tsconfig.app.json",
+        "assets": [
+          "apps/get-user-media-volume/src/favicon.ico",
+          "apps/get-user-media-volume/src/assets"
+        ],
+        "styles": ["apps/get-user-media-volume/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/get-user-media-volume/src/environments/environment.ts",
+              "with": "apps/get-user-media-volume/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "get-user-media-volume:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "get-user-media-volume:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/get-user-media-volume/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/get-user-media-volume"],
+      "options": {
+        "jestConfig": "apps/get-user-media-volume/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

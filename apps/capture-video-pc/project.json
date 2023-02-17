@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/capture-video-pc/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/capture-video-pc",
+        "compiler": "babel",
+        "index": "apps/capture-video-pc/src/index.html",
+        "baseHref": "/",
+        "main": "apps/capture-video-pc/src/main.ts",
+        "polyfills": "apps/capture-video-pc/src/polyfills.ts",
+        "tsConfig": "apps/capture-video-pc/tsconfig.app.json",
+        "assets": [
+          "apps/capture-video-pc/src/favicon.ico",
+          "apps/capture-video-pc/src/assets"
+        ],
+        "styles": ["apps/capture-video-pc/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/capture-video-pc/src/environments/environment.ts",
+              "with": "apps/capture-video-pc/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "capture-video-pc:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "capture-video-pc:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/capture-video-pc/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/capture-video-pc"],
+      "options": {
+        "jestConfig": "apps/capture-video-pc/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

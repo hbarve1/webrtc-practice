@@ -1,0 +1,30 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/get-user-media-getdisplaymedia-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/get-user-media-getdisplaymedia-e2e/cypress.json",
+        "devServerTarget": "get-user-media-getdisplaymedia:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "get-user-media-getdisplaymedia:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/get-user-media-getdisplaymedia-e2e/**/*.{js,ts}"
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["get-user-media-getdisplaymedia"]
+}

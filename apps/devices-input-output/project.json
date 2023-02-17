@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/devices-input-output/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/devices-input-output",
+        "compiler": "babel",
+        "index": "apps/devices-input-output/src/index.html",
+        "baseHref": "/",
+        "main": "apps/devices-input-output/src/main.ts",
+        "polyfills": "apps/devices-input-output/src/polyfills.ts",
+        "tsConfig": "apps/devices-input-output/tsconfig.app.json",
+        "assets": [
+          "apps/devices-input-output/src/favicon.ico",
+          "apps/devices-input-output/src/assets"
+        ],
+        "styles": ["apps/devices-input-output/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/devices-input-output/src/environments/environment.ts",
+              "with": "apps/devices-input-output/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "devices-input-output:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "devices-input-output:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/devices-input-output/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/devices-input-output"],
+      "options": {
+        "jestConfig": "apps/devices-input-output/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

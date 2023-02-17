@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/datachannel-basic/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/datachannel-basic",
+        "compiler": "babel",
+        "index": "apps/datachannel-basic/src/index.html",
+        "baseHref": "/",
+        "main": "apps/datachannel-basic/src/main.ts",
+        "polyfills": "apps/datachannel-basic/src/polyfills.ts",
+        "tsConfig": "apps/datachannel-basic/tsconfig.app.json",
+        "assets": [
+          "apps/datachannel-basic/src/favicon.ico",
+          "apps/datachannel-basic/src/assets"
+        ],
+        "styles": ["apps/datachannel-basic/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/datachannel-basic/src/environments/environment.ts",
+              "with": "apps/datachannel-basic/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "datachannel-basic:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "datachannel-basic:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/datachannel-basic/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/datachannel-basic"],
+      "options": {
+        "jestConfig": "apps/datachannel-basic/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

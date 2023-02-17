@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/peerconnection-change-codecs/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/peerconnection-change-codecs",
+        "compiler": "babel",
+        "index": "apps/peerconnection-change-codecs/src/index.html",
+        "baseHref": "/",
+        "main": "apps/peerconnection-change-codecs/src/main.ts",
+        "polyfills": "apps/peerconnection-change-codecs/src/polyfills.ts",
+        "tsConfig": "apps/peerconnection-change-codecs/tsconfig.app.json",
+        "assets": [
+          "apps/peerconnection-change-codecs/src/favicon.ico",
+          "apps/peerconnection-change-codecs/src/assets"
+        ],
+        "styles": ["apps/peerconnection-change-codecs/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/peerconnection-change-codecs/src/environments/environment.ts",
+              "with": "apps/peerconnection-change-codecs/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "peerconnection-change-codecs:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "peerconnection-change-codecs:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/peerconnection-change-codecs/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/peerconnection-change-codecs"],
+      "options": {
+        "jestConfig": "apps/peerconnection-change-codecs/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

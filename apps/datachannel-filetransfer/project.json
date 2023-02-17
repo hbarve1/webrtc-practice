@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/datachannel-filetransfer/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/datachannel-filetransfer",
+        "compiler": "babel",
+        "index": "apps/datachannel-filetransfer/src/index.html",
+        "baseHref": "/",
+        "main": "apps/datachannel-filetransfer/src/main.ts",
+        "polyfills": "apps/datachannel-filetransfer/src/polyfills.ts",
+        "tsConfig": "apps/datachannel-filetransfer/tsconfig.app.json",
+        "assets": [
+          "apps/datachannel-filetransfer/src/favicon.ico",
+          "apps/datachannel-filetransfer/src/assets"
+        ],
+        "styles": ["apps/datachannel-filetransfer/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/datachannel-filetransfer/src/environments/environment.ts",
+              "with": "apps/datachannel-filetransfer/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "datachannel-filetransfer:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "datachannel-filetransfer:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/datachannel-filetransfer/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/datachannel-filetransfer"],
+      "options": {
+        "jestConfig": "apps/datachannel-filetransfer/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/peerconnection-multiple/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/peerconnection-multiple",
+        "compiler": "babel",
+        "index": "apps/peerconnection-multiple/src/index.html",
+        "baseHref": "/",
+        "main": "apps/peerconnection-multiple/src/main.ts",
+        "polyfills": "apps/peerconnection-multiple/src/polyfills.ts",
+        "tsConfig": "apps/peerconnection-multiple/tsconfig.app.json",
+        "assets": [
+          "apps/peerconnection-multiple/src/favicon.ico",
+          "apps/peerconnection-multiple/src/assets"
+        ],
+        "styles": ["apps/peerconnection-multiple/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/peerconnection-multiple/src/environments/environment.ts",
+              "with": "apps/peerconnection-multiple/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "peerconnection-multiple:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "peerconnection-multiple:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/peerconnection-multiple/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/peerconnection-multiple"],
+      "options": {
+        "jestConfig": "apps/peerconnection-multiple/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
